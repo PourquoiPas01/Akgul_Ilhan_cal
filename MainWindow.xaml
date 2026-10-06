@@ -1,0 +1,136 @@
+﻿<Window x:Class="Akgul_Ilhan_cal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Akgul_Ilhan_cal"
+        mc:Ignorable="d"
+        Title="Akgul_Ilhan_cal" Height="510" Width="420"
+        PreviewTextInput="Window_PreviewTextInput"
+        PreviewKeyDown="Window_PreviewKeyDown">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Background" Value="DimGray"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="38"/>
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+
+            <Style x:Key="Scientifique" TargetType="{x:Type Control}">
+                <Setter Property="Margin" Value="15"/>
+                <Setter Property="Background" Value="DarkGray"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+
+            <Style TargetType="{x:Type Grid}">
+                <Setter Property="Background" Value="Black"/>
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+
+            <Style x:Key="MyStyle" TargetType="{x:Type Control}">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Background" Value="Orange"/>
+                <Setter Property="FontSize" Value="38"/>
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <!-- Colonne du panneau scientifique : largeur 0 au départ, agrandie par le code -->
+            <ColumnDefinition x:Name="COL_Scientifique" Width="0"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Row="0" Grid.ColumnSpan="5" Name="TB_Display" Text="0" 
+         FontSize="40"
+         IsReadOnly="True"
+         HorizontalContentAlignment="Right"
+         VerticalContentAlignment="Center"/>
+
+        <Button Grid.Row="0" Grid.Column="0" Name="BTN_Scientifique" Content="S" Style="{StaticResource Scientifique}" Click="BTN_Calculette_Scientifique" 
+                Margin="10,10,50,24" 
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"/>
+
+        <Button Grid.Row="1" Grid.Column="0" Name="BTN_1" Content="1" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="1" Grid.Column="1" Name="BTN_2" Content="2" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="1" Grid.Column="2" Name="BTN_3" Content="3" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="1" Grid.Column="3" Name="BTN_Plus" Content="+" Style="{StaticResource MyStyle}" Click="BTN_Operateur_Click" />
+
+        <Button Grid.Row="2" Grid.Column="0" Name="BTN_4" Content="4" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="2" Grid.Column="1" Name="BTN_5" Content="5" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="2" Grid.Column="2" Name="BTN_6" Content="6" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="2" Grid.Column="3" Name="BTN_Fois" Content="*" Style="{StaticResource MyStyle}" Click="BTN_Operateur_Click" />
+
+        <Button Grid.Row="3" Grid.Column="0" Name="BTN_7" Content="7" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="3" Grid.Column="1" Name="BTN_8" Content="8" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="3" Grid.Column="2" Name="BTN_9" Content="9" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="3" Grid.Column="3" Name="BTN_Moins" Content="-" Style="{StaticResource MyStyle}" Click="BTN_Operateur_Click" />
+
+        <Button Grid.Row="4" Grid.Column="0" Name="BTN_0" Content="0" Click="BTN_Chiffre_Click" />
+        <Button Grid.Row="4" Grid.Column="1" Name="BTN_CLR" Content="AC" Style="{StaticResource MyStyle}" Click="BTN_CLR_Click" />
+        <Button Grid.Row="4" Grid.Column="2" Name="BTN_egale" Content="=" Style="{StaticResource MyStyle}" Click="BTN_Egale_Click" />
+        <Button Grid.Row="4" Grid.Column="3" Name="BTN_DIV" Content="/" Style="{StaticResource MyStyle}" Click="BTN_Operateur_Click" />
+
+        <!-- ================== PANNEAU SCIENTIFIQUE ================== -->
+        <Grid x:Name="PANEL_Scientifique" Grid.Row="1" Grid.Column="4" Grid.RowSpan="4" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Content="sin" Tag="sin"   Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="cos" Tag="cos"   Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+            <Button Grid.Row="0" Grid.Column="2" Content="tan" Tag="tan"   Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+
+            <Button Grid.Row="1" Grid.Column="0" Content="√"   Tag="sqrt"  Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+            <Button Grid.Row="1" Grid.Column="1" Content="x²"  Tag="carre" Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+            <Button Grid.Row="1" Grid.Column="2" Content="xʸ"  Tag="^"     Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+
+            <Button Grid.Row="2" Grid.Column="0" Content="log" Tag="log"   Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+            <Button Grid.Row="2" Grid.Column="1" Content="ln"  Tag="ln"    Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+            <Button Grid.Row="2" Grid.Column="2" Content="1/x" Tag="inv"   Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+
+            <Button Grid.Row="3" Grid.Column="0" Content="π"   Tag="pi"    Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+            <Button Grid.Row="3" Grid.Column="1" Content="±"   Tag="neg"   Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+            <Button Grid.Row="3" Grid.Column="2" Content="n!"  Tag="fact"  Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+        </Grid>
+    </Grid>
+</Window>
