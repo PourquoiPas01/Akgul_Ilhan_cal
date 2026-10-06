@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Akgul_Ilhan_cal"
         mc:Ignorable="d"
-        Title="Akgul_Ilhan_cal" Height="510" Width="420"
+        Title="MainWindow" Height="510" Width="420"
         PreviewTextInput="Window_PreviewTextInput"
         PreviewKeyDown="Window_PreviewKeyDown">
     <Grid>
@@ -130,7 +130,7 @@
 
             <Button Grid.Row="3" Grid.Column="0" Content="π"   Tag="pi"    Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
             <Button Grid.Row="3" Grid.Column="1" Content="±"   Tag="neg"   Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
-            <Button Grid.Row="3" Grid.Column="2" Content="n!"  Tag="fact"  Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
+            <Button Grid.Row="3" Grid.Column="2" Content=","   Tag="virgule" Style="{StaticResource Scientifique}" Click="BTN_Fonction_Click"/>
         </Grid>
     </Grid>
 </Window>

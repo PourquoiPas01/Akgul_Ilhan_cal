@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -40,6 +41,11 @@ namespace Akgul_Ilhan_cal
             else if (t == "+" || t == "-" || t == "*" || t == "/" || t == "^")
             {
                 ChoisirOperateur(t);
+                e.Handled = true;
+            }
+            else if (t == "," || t == ".")
+            {
+                AjouterVirgule();
                 e.Handled = true;
             }
             else if (t == "=")
@@ -124,6 +130,13 @@ namespace Akgul_Ilhan_cal
         {
             string fonction = (sender as Button)?.Tag?.ToString();
 
+            // Virgule : on ajoute le séparateur décimal
+            if (fonction == "virgule")
+            {
+                AjouterVirgule();
+                return;
+            }
+
             // xʸ a besoin de deux nombres : on le traite comme un opérateur
             if (fonction == "^")
             {
@@ -146,6 +159,24 @@ namespace Akgul_Ilhan_cal
             else
             {
                 TB_Display.Text += chiffre;
+            }
+        }
+
+        private void AjouterVirgule()
+        {
+            // Séparateur décimal de la langue du PC (virgule en français)
+            string sep = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+
+            if (_nouvelleSaisie)
+            {
+                // Après un opérateur ou un résultat : on repart de "0,"
+                TB_Display.Text = "0" + sep;
+                _nouvelleSaisie = false;
+            }
+            else if (!TB_Display.Text.Contains(sep))
+            {
+                // Une seule virgule par nombre
+                TB_Display.Text += sep;
             }
         }
 
@@ -216,17 +247,6 @@ namespace Akgul_Ilhan_cal
                 case "inv": r = 1 / x; break;
                 case "pi": r = Math.PI; break;
                 case "neg": r = -x; break;
-                case "fact":
-                    // Factorielle : entiers de 0 à 170 seulement
-                    if (x < 0 || x != Math.Floor(x) || x > 170)
-                    {
-                        r = double.NaN;
-                        break;
-                    }
-                    r = 1;
-                    for (int i = 2; i <= (int)x; i++)
-                        r *= i;
-                    break;
                 default:
                     return;
             }
